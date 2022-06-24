@@ -10,6 +10,7 @@ export class UptimeCommand implements BotCommand {
         aliases: ["futas", "megyastream"],
         cooldown: 1,
         enabled: true,
+        description: "Shows the uptime of the stream",
     }
     require: CommandRequire = {
         developer: false,

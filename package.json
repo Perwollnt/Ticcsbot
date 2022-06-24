@@ -14,8 +14,10 @@
     "@discordjs/collection": "^0.7.0",
     "axios": "^0.27.2",
     "chalk": "^5.0.1",
+    "cron": "^2.0.0",
     "date-diff": "^1.0.2",
     "dotenv": "^16.0.1",
+    "firebase-admin": "^11.0.0",
     "fs": "^0.0.1-security",
     "https": "^1.0.0",
     "moment": "^2.29.3",
@@ -25,8 +27,12 @@
     "tmi.js": "^1.8.5"
   },
   "devDependencies": {
+    "@types/cron": "^2.0.0",
     "@types/node": "^18.0.0",
     "@types/tmi.js": "^1.8.1",
     "tslib": "^2.4.0"
+  },
+  "nodemonConfig": {
+    "ignore": ["package.json", "settings.json"]
   }
 }

@@ -22,7 +22,7 @@ export async function checkTheCommand(client: Client, channel: string, state: Ch
         const authorId = state["user-id"] as String;
 
         if(cmd.config.enabled !== true) return;
-        if(cmd.require.developer && !isDeveloper(authorId)) return;
+        if(cmd.require.developer && !isDeveloper(authorId, state)) return;
         if(cmd.require.mod && !isMod(state)) return;
         if(cmd.require.sub && !isSub(state)) return;
         if(cmd.require.follower && !isFollower(state)) return;
@@ -44,7 +44,7 @@ export async function checkTheCommand(client: Client, channel: string, state: Ch
                 }
             }
         }
-        if(isDeveloper(authorId) && isMod(state)) {
+        if(isDeveloper(authorId, state) && isMod(state)) {
             timestamps.set(authorId, now);
             setTimeout(() => timestamps.delete(authorId), cooldownAmount);
         }
@@ -54,10 +54,12 @@ export async function checkTheCommand(client: Client, channel: string, state: Ch
     } catch (ignore) { return console.log(ignore); }
 }
 
-export function isDeveloper(id: String) {
+export function isDeveloper(id: String, state: ChatUserstate) {
+    if(state.badges.broadcaster) return true;
     return config.devs.includes(`${id}`);
 }
 export function isMod(id: ChatUserstate) {
+    if(id.badges.broadcaster) return true;
     if(config.devs.includes(`${id["user-id"]}`)) return true;
     else return id.mod as boolean;
 }
