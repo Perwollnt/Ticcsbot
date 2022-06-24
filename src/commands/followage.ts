@@ -60,6 +60,9 @@ export class FollowageCommand implements BotCommand {
             }
         } else {
             const date = temp.date;
+            const today = new Date();
+            console.log(today);
+            console.log(date);
             const c = date.split("T")[1];
             const trudate = {
                 year: date.split("-")[0],

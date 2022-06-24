@@ -23,7 +23,9 @@ export class UptimeCommand implements BotCommand {
 
     onTriggered = async (client: Client, channel: string, state: ChatUserstate, message: String, args: Array<String>) => {
         const streamerid = (await this.apiManager.getUser(`${channel.replaceAll("#", "")}`)).data.data[0].id;
+
         const resp = (await this.apiManager.getStreamTime(streamerid)).data;
+        console.log(resp);
         const diff = new DateDiff(new Date(), new Date(resp.data[0].started_at));
         var datea = new Date(null);
         datea.setSeconds(diff.seconds());
