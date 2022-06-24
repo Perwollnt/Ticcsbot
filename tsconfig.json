@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "commonjs",
+      "sourceMap": true,
+      "outDir": "./dist/",
+      "rootDir": "src",
+      "importHelpers": true,
+      "moduleResolution": "node",
+      "allowSyntheticDefaultImports": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true
+    },
+    "compileOnSave": true,
+    "include": ["src"]
+  }
