@@ -1,1 +1,1 @@
-{"cron":{"enabled":false,"messages":[{"message":"Hello World","time":"*/5 * * * *"},{"message":"Goodbye World","time":"*/1 * * * *"},{"message":"Goodbye World2","time":"*/10 * * * *"}]}}
+{"cron":{"enabled":true}}

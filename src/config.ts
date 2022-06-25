@@ -39,6 +39,17 @@ export const messages = {
     }
 }
 
+export const automessages = {
+    timer: 1,
+    msg: [
+        "Támogatási lehetőségért látogass el a patreon oldalunkra: https://bit.ly/ssspatreon",
+        "Ha esetleg szeretnéd támogatni a csatornát egy kis összeggel ezzel segítve a csatorna fejlődését itt bármikor megteheted. https://streamlabs.com/ts_thomson/tip",
+        "Csatlakoznál közösségünk discord szerverére? Tedd meg ma és légy az árnyak társaságának tagja. https://discord.gg/cqbbfVxssW",
+        "Ha esetleg valamilyen formában segítenéd a munkánkat akkor, dobj meg egy követéssel, hogy te is tagja lehess az árnyak társaságának.",
+    
+    ]
+}
+
 export const chatcmds = [
     {
         name: "backseat",
