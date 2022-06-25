@@ -284,8 +284,8 @@ export class EconomyCommand implements BotCommand {
     }
 
     async randomBreak() {
-        const random = Math.floor(Math.random() * 100) + 1;
-        if(random !== 1) {
+        const random = Math.floor(Math.random() * 50) + 1;
+        if(random == 1) {
             return true;
         } else {
             return false;
