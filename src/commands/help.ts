@@ -32,7 +32,7 @@ export class HelpCommand implements BotCommand {
       client.say(channel, set.messages.Help.message.replaceAll("%u", state.username).replaceAll("%cmds", commands.join(", ")));
     } else {
       for (let e of commandList) {
-        if (e[1].config.name.match(`${args[0]}`)) {
+        if (e[1].config.name == `${args[0]}`) {
           client.say(channel, set.messages.Help.messageargs.replaceAll("%uname", state.username).replaceAll("%cmd", `${e[1].config.name}`).replaceAll("%desc", `${e[1].config.description}`).replaceAll("%alias", e[1].config.aliases.join(", ")).replaceAll("%cooldown", e[1].config.cooldown.toString()).replaceAll("%en", e[1].config.enabled.toString()));
         }
 

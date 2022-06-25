@@ -36,7 +36,76 @@ export const messages = {
     },
     schedule: {
         message: "%u! %schedule", //%u = userName | %schedule = schedule
+    },
+    economy: {
+        defaults: {
+            money: 5,
+        },
+        helpmessage: `%u! Available commands: !economy work [mine | fish | explore ] | !economy buy [pickaxe | flashlight | fishing_rod] | !economy gamble [dice <money> | superdice <number> <money>]]`, //%u = userName
+        work_needarg: `%u! You need to specify a job to work. Available jobs: mine | fish | explore`, //%u = userName
+        work_broken_item: `%u! Your tool broke while doing your job! Buy another one using !economy buy %i.`, //%u = userName | %i = item
+        moneyranges: {
+            work: {
+                mine: {
+                    range: [0, 10],
+                    ores: ["stone", "copper", "iron", "gold", "diamond"],
+                    message: `%u! You mined %o. Here! Have %m coin(s)!`, //%u = userName | %m = money | %o = ores
+                },
+                fish: {
+                    range: [0, 7],
+                    fish: ["salmon", "trout", "pike", "bass", "catfish", "shark", "eel"],
+                    message: `%u! You caught a %f. Here! Have %m coin(s)!`, //%u = userName | %m = money | %f = fish
+                },
+                explore: {
+                    range: [0, 20],
+                    message: `%u! You explored the %a. Here! Have %m coin(s)!`, //%u = userName | %m = money | %a = area
+                    area: ["forest", "desert", "mountain", "swamp", "jungle"],
+                },
+                work: [0, 5],
+            }
+        },
+        gamble: {
+            help: "!economy gamble [dice <money> | superdice <number> <money>] | dice: Bet on a dice roll, if the bot rolls higher you lose! | Superdice: Bet money and a nubmer on a dice roll, if you win your winnings will be calculated using: (20 - bet number) * (bet money / 2).",
+            wins: {
+                user: "%u! You won(%s)! You get back your %m coin(s) + %w!", //%u = userName | %m = money | %s = state | %w = wincoins
+                bot: "%u! The bot won(%s)! You lost %m coin(s)!", //%u = userName | %m = money | %s = state
+                draw: "%u! It's a draw! (%s) You get your coins back(%m)!", //%u = userName | %m = money | %s = state
+            },
+            no_bet: "%u!Where's The Money Lebowski?", //%u = userName
+            no_money: "%u! You don't have enough money!", //%u = userName
+            no_correct_bet: "%u! You need to bet a number between 1 and 20!", //%u = userName
+            no_enought_args: "%u! You need to bet a number and a number of coins!", //%u = userName
+        },
+        balancemessage: `%u! You have %m coin(s)!`, //%u = userName | %m = money
+        shop: {
+            needarg: "%u! You need to specify an item to buy! (pickaxe, flashlight, fishing_rod)", //%u = userName
+            no_money: "%u! You don't have enough money to buy a %i! (%m)", //%u = userName | %i = item | %m = money
+            bought: "%u! You bought %i for %m coin(s)!", //%u = userName | %i = item | %m = money
+            pickaxe: {
+                name: "pickaxe",
+                cost: 10,
+            },
+            flashlight: {
+                name: "flashlight",
+                cost: 10,
+            },
+            fishing_rod: {
+                name: "fishing_rod",
+                cost: 10,
+            },
+        }
     }
+}
+
+export const automessages = {
+    timer: 1,
+    msg: [
+        "Támogatási lehetőségért látogass el a patreon oldalunkra: https://bit.ly/ssspatreon",
+        "Ha esetleg szeretnéd támogatni a csatornát egy kis összeggel ezzel segítve a csatorna fejlődését itt bármikor megteheted. https://streamlabs.com/ts_thomson/tip",
+        "Csatlakoznál közösségünk discord szerverére? Tedd meg ma és légy az árnyak társaságának tagja. https://discord.gg/cqbbfVxssW",
+        "Ha esetleg valamilyen formában segítenéd a munkánkat akkor, dobj meg egy követéssel, hogy te is tagja lehess az árnyak társaságának.",
+    
+    ]
 }
 
 export const chatcmds = [

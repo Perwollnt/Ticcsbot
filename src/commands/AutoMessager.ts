@@ -1,11 +1,9 @@
 import { ChatUserstate, Client } from 'tmi.js';
 import { BotCommand, CommandConfig, CommandRequire } from '../utils/interfaces';
-import * as admin from 'firebase-admin';
 import * as fs from 'fs';
-import { firestore } from 'firebase-admin';
 import { CronManager } from '../stuff/cronManager';
-import { EventEmitter } from 'stream';
 const cronSettings = require("../../settings.json");
+import * as set from '../config';
 
 export class AutoMessagerCommand implements BotCommand {
 
@@ -30,7 +28,7 @@ export class AutoMessagerCommand implements BotCommand {
     state: ChatUserstate;
     message:String;
     args: Array<String>;
-
+    amsgcounter = 0;
 
     cronManager = new CronManager();
 
@@ -38,18 +36,29 @@ export class AutoMessagerCommand implements BotCommand {
     onTriggered = async (client: Client, channel: string, state: ChatUserstate, message: String, args: Array<String>) => {
         if(!args[0]) return client.say(channel, `Currently: ${cronSettings.cron.enabled}, and ${this.cronnum} cron jobs are running`);
         if(args[0] == "enable") {
-            for(let e of cronSettings.cron.messages) { 
-                this.cronManager.run(e.message, e.time, client, channel);
-                this.cronnum++;
-            }
             cronSettings.cron.enabled = true;
+            client.say(channel, "Auto messager enabled");
             fs.writeFileSync("settings.json", JSON.stringify(cronSettings));
-            return client.say(channel, "Enabled! Loaded " + this.cronnum + " messages.");
+            setInterval(() => {
+                this.sendMessage(client);
+            }, (set.automessages.timer * 60 * 60 * 60));
         } else if(args[0] == "disable") {
             cronSettings.cron.enabled = false;
+            client.say(channel, "Auto messager disabled");
             fs.writeFileSync("settings.json", JSON.stringify(cronSettings));
-            client.say(channel, "Disabled! Stopped " + this.cronnum + " messages.");
             return this.cronnum = 0;
         }
+    }
+    numup() {
+        this.amsgcounter++;
+        console.log(`msgcount: ${this.amsgcounter}`);
+    }
+
+    async sendMessage(client: Client) {
+        if(!cronSettings.cron.enabled) return;
+        if(this.amsgcounter < 3) return console.log(`tried sending message but too few messages have been sent ${this.amsgcounter}`);
+        const msg = set.automessages.msg[Math.floor(Math.random() * set.automessages.msg.length)];
+        client.say(set.botconfig.channels, msg);
+        this.amsgcounter = 0;
     }
 }

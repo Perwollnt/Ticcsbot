@@ -1,6 +1,6 @@
 import { ChatUserstate, Client } from 'tmi.js';
 import { BotCommand, CommandConfig, CommandRequire } from '../utils/interfaces';
-
+import * as set from '../config';
 
 export class TestCommand implements BotCommand {
     config: CommandConfig = {
