@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "watch": "tsc --w",
-    "start": "tsc && node dist/"
+    "start": "tsc && node dist/",
+    "install": "npm install -g typescript nodemon && npm i"
   },
   "keywords": [],
   "author": "",

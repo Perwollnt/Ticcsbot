@@ -10,7 +10,7 @@ export const client = new Client({
 	options: { debug: true },
     connection: { reconnect: true, secure: true },
 	identity: {
-		username: `${botconfig.username}`,
+		username: botconfig.username,
 		password: `oauth:${botconfig.token}`
 	},
 	channels: [`${botconfig.channels}`]
