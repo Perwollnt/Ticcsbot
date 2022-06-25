@@ -1,4 +1,4 @@
-import { ChatUserstate, Client } from 'tmi.js';
+/*import { ChatUserstate, Client } from 'tmi.js';
 import { BotCommand, CommandConfig, CommandRequire } from '../utils/interfaces';
 import * as set from '../config';
 import * as admin from 'firebase-admin';
@@ -7,8 +7,8 @@ import { firestore } from 'firebase-admin';
 
 export class EconomyCommand implements BotCommand {
     config: CommandConfig = {
-        name: "economy",
-        aliases: ["e"],
+        name: "aeconomy",
+        aliases: ["ae"],
         cooldown: 1,
         enabled: true,
         description: "Economy command(s)",
@@ -291,4 +291,4 @@ export class EconomyCommand implements BotCommand {
             return false;
         }
     }
-}
+}*/

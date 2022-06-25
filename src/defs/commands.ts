@@ -5,7 +5,8 @@ import { UptimeCommand } from '../commands/uptime';
 import { EightBallCommand } from '../commands/8ball';
 import { HelpCommand } from '../commands/help';
 import { AutoMessagerCommand } from '../commands/AutoMessager';
-import { EconomyCommand } from '../commands/economy';
+/*import { EconomyCommand } from '../commands/economy';*/
+import { RealEconomyCommand } from '../commands/realEconomy';
 
 export const commands: Array<BotCommand> = [
     new TestCommand,
@@ -14,5 +15,6 @@ export const commands: Array<BotCommand> = [
     new EightBallCommand,
     new HelpCommand,
     new AutoMessagerCommand,
-    new EconomyCommand,
+    /*new EconomyCommand,*/
+    new RealEconomyCommand,
 ];

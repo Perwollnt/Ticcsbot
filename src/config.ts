@@ -1,6 +1,11 @@
 import { config } from "dotenv"
+import { ItemInterface, JobInterface } from "./interfaces/EconomyInterface";
 
 config();
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+export const TODO = "FINISH ECONOMY SHOP ETC";
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 
 export const botconfig = {
     prefix: process.env.PREFIX,
@@ -37,64 +42,6 @@ export const messages = {
     schedule: {
         message: "%u! %schedule", //%u = userName | %schedule = schedule
     },
-    economy: {
-        defaults: {
-            money: 5,
-        },
-        helpmessage: `%u! Available commands: !economy work [mine | fish | explore ] | !economy buy [pickaxe | flashlight | fishing_rod] | !economy gamble [dice <money> | superdice <number> <money>]]`, //%u = userName
-        work_needarg: `%u! You need to specify a job to work. Available jobs: mine | fish | explore`, //%u = userName
-        work_broken_item: `%u! Your tool broke while doing your job! Buy another one using !economy buy %i.`, //%u = userName | %i = item
-        moneyranges: {
-            work: {
-                mine: {
-                    range: [0, 10],
-                    ores: ["stone", "copper", "iron", "gold", "diamond"],
-                    message: `%u! You mined %o. Here! Have %m coin(s)!`, //%u = userName | %m = money | %o = ores
-                },
-                fish: {
-                    range: [0, 7],
-                    fish: ["salmon", "trout", "pike", "bass", "catfish", "shark", "eel"],
-                    message: `%u! You caught a %f. Here! Have %m coin(s)!`, //%u = userName | %m = money | %f = fish
-                },
-                explore: {
-                    range: [0, 20],
-                    message: `%u! You explored the %a. Here! Have %m coin(s)!`, //%u = userName | %m = money | %a = area
-                    area: ["forest", "desert", "mountain", "swamp", "jungle"],
-                },
-                work: [0, 5],
-            }
-        },
-        gamble: {
-            help: "!economy gamble [dice <money> | superdice <number> <money>] | dice: Bet on a dice roll, if the bot rolls higher you lose! | Superdice: Bet money and a nubmer on a dice roll, if you win your winnings will be calculated using: (20 - bet number) * (bet money / 2).",
-            wins: {
-                user: "%u! You won(%s)! You get back your %m coin(s) + %w!", //%u = userName | %m = money | %s = state | %w = wincoins
-                bot: "%u! The bot won(%s)! You lost %m coin(s)!", //%u = userName | %m = money | %s = state
-                draw: "%u! It's a draw! (%s) You get your coins back(%m)!", //%u = userName | %m = money | %s = state
-            },
-            no_bet: "%u!Where's The Money Lebowski?", //%u = userName
-            no_money: "%u! You don't have enough money!", //%u = userName
-            no_correct_bet: "%u! You need to bet a number between 1 and 20!", //%u = userName
-            no_enought_args: "%u! You need to bet a number and a number of coins!", //%u = userName
-        },
-        balancemessage: `%u! You have %m coin(s)!`, //%u = userName | %m = money
-        shop: {
-            needarg: "%u! You need to specify an item to buy! (pickaxe, flashlight, fishing_rod)", //%u = userName
-            no_money: "%u! You don't have enough money to buy a %i! (%m)", //%u = userName | %i = item | %m = money
-            bought: "%u! You bought %i for %m coin(s)!", //%u = userName | %i = item | %m = money
-            pickaxe: {
-                name: "pickaxe",
-                cost: 10,
-            },
-            flashlight: {
-                name: "flashlight",
-                cost: 10,
-            },
-            fishing_rod: {
-                name: "fishing_rod",
-                cost: 10,
-            },
-        }
-    }
 }
 
 export const automessages = {
@@ -138,3 +85,154 @@ export const chatcmds = [
         value: "Ha szeretnéd visszatekinteni az adásokat katt ide: https://www.youtube.com/channel/UCDGLH-GqIGSOC2J-DsaBh7A",
     }
 ]
+
+export const EconomyItems = {
+    spear: { name: "Spear", cost: 1000, boost: 1.1 },
+    sword: { name: "Sword", cost: 1000, boost: 1.2 },
+    gun: { name: "Gun", cost: 1000, boost: 1.1 },
+    fishing_rod: { name: "Fishing rod", cost: 1000, boost: 1.2 },
+    fancy_boots: { name: "Fancy boots", cost: 1000, boost: 1.1 },
+    rope: { name: "Rope", cost: 1000, boost: 1.1 },
+    shovel: { name: "Shovel", cost: 1000, boost: 1.2 },
+    fishing_net: { name: "Fishing net", cost: 1000, boost: 1.2 },
+    pickaxe: { name: "Pickaxe", cost: 1000, boost: 1.2 },
+    flashlight: { name: "Flashlight", cost: 1000, boost: 1.2 },
+}
+
+export const Economy = {
+    work: {
+        need_arg: `%u! You need to specify a job to work. Available jobs: mine | fish | explore | hunt`, //%u = userName
+        broken_item: `%u! Your tool broke while doing your job! Buy another one using !economy buy %i.`, //%u = userName | %i = item
+        boost_items: `%u! You had some usefull tools that helped you in your journey.`, //%u = userName
+    },
+    gamble: {
+        help: "!economy gamble [dice <money> | superdice <number> <money>] | dice: Bet on a dice roll, if the bot rolls higher you lose! | Superdice: Bet money and a nubmer on a dice roll, if you win your winnings will be calculated using: (20 - bet number) * (bet money / 2).",
+        wins: {
+            user: "%u! You won(%s)! You get back your %m coin(s) + %w!", //%u = userName | %m = money | %s = state | %w = wincoins
+            bot: "%u! The bot won(%s)! You lost %m coin(s)!", //%u = userName | %m = money | %s = state
+            draw: "%u! It's a draw! (%s) You get your coins back(%m)!", //%u = userName | %m = money | %s = state
+        },
+        no_bet: "%u!Where's The Money Lebowski?", //%u = userName
+        no_money: "%u! You don't have enough money!", //%u = userName
+        no_correct_bet: "%u! You need to bet a number between 1 and 20!", //%u = userName
+        no_enought_args: "%u! You need to bet a number and a number of coins!", //%u = userName
+    },
+    shop: {
+        needarg: "%u! You need to specify an item to buy! (spear, sword, gun, fishing rod, fancy boots, rope, shovel, fishing net, pickaxe, flashlight)", //%u = userName
+        no_money: "%u! You don't have enough money to buy a %i! (%m)", //%u = userName | %i = item | %m = money
+        bought: "%u! You bought %i for %m coin(s)!", //%u = userName | %i = item | %m = money
+    },
+    help: {
+        message: `%u! Available commands: !economy work [mine | fish | explore ] | !economy buy [pickaxe | flashlight | fishing_rod] | !economy gamble [dice <money> | superdice <number> <money>]]`, //%u = userName
+    },
+    defaults: {
+        money: 5,
+    },
+    balance: `%u! You have %m coin(s)!` //%u = userName | %m = money
+}
+
+export const Jobs = {
+    mine: { 
+        moneyrange: [0, 5],
+        itemrange: [0, 7],
+        prices: {
+            stone: 1,
+            iron: 2,
+            gold: 2,
+            diamond: 3,
+            emerald: 3,
+            quartz: 4,
+            coal: 1,
+        },
+        orenames: {
+            stone: "stone",
+            iron: "iron",
+            gold: "gold",
+            diamond: "diamond",
+            emerald: "emerald",
+            quartz: "quartz",
+            coal: "coal",
+        },
+        ores: ["stone", "iron", "gold", "diamond", "emerald", "quartz", "coal"],
+        messages: ["You mined %i and got %m gold coins!", "You mined  %i and got %m silver coins!", "You mined  %i and got %m coins!"], //%p = quantity | %i = item | %m = money
+        break_messages: ["Your %i broke while mining!", "You broke your %i while mining!", "A bat scared you and you dropped your %i in a hole!"], //%i = item
+        helps: ["Fancy boots", "Rope", "Shovel", "Flashlight", "Pickaxe"],
+    },
+
+    fish: { 
+        moneyrange: [1, 4],
+        itemrange: [1, 6],
+        prices: {
+            cod: 1,
+            salmon: 1,
+            pufferfish: 2,
+            clownfish: 1,
+            dolphin: 1,
+            jellyfish: 2,
+        },
+        fishnames: {
+            cod: "cod",
+            salmon: "salmon",
+            pufferfish: "pufferfish",
+            clownfish: "clownfish",
+            dolphin: "dolphin",
+            jellyfish: "jellyfish",
+        },
+        fish: ["cod", "salmon", "pufferfish", "clownfish", "dolphin", "jellyfish"], 
+        nothing: "a random generic fish",
+        messages: ["You caught  %i and got %m gold coins!", "You managed to catch  %i and got %m silver coins!", "You caught  %i and got %m coins!", "You caught  %i but let it live. Here's %m coins for your deed!"], //%p = quantity | %i = item | %m = money
+        break_messages: ["Your %i broke while fishing!", "You broke your %i while fishing!", "A shark scared you and you dropped your %i in the water!"], //%i = item
+        helps: ["Fancy boots", "Rope", "Gun", "Fishing rod"], 
+    },
+
+    explore: { 
+        moneyrange: [0, 20],
+        itemrange: [0, 7],
+        prices: {
+            forest: 1,
+            desert: 1,
+            mountain: 2,
+            plains: 1,
+            jungle: 1,
+            ocean: 2,
+            snow: 1,
+            volcano: 2,
+            void: 1,
+        },
+        area: ["forest", "desert", "mountain", "plains", "jungle", "ocean", "snow", "volcano", "void"], 
+        messages: ["You went exploring to the %b biome and found %m gold coins!", "You went exploring to the %b biome and found %m silver coins!", "You went exploring to the %b biome and found %m coins!"], //%b = area | %m = money
+        break_messages: ["Your %i broke while exploring!", "You broke your %i while exploring!", "A bat scared you and you dropped your %i in a hole!", "You almost got hit by an elephant and you dropped your %i while running"], //%i = item
+        helps: ["Fancy boots", "Rope", "Shovel", "Flashlight", "Pickaxe", "Gun", "Sword"],
+    },
+
+    hunt: { 
+        moneyrange: [0, 20],
+        itemrange: [0, 7], 
+        prices: {
+            rabbit: 1,
+            fox: 1,
+            bear: 2,
+            pig: 1,
+            sheep: 1,
+            chicken: 1,
+            whale: 2,
+            dolphin: 1,
+            jellyfish: 2,
+        },
+        animalsnames: { // has to be the same as animals and as long as prices // u cant make it longer YET sadly and please dont try cuz it will break ( u need to edit code to add more animals )
+            rabbit: "rabbit",
+            fox: "fox",
+            bear: "bear",
+            pig: "pig",
+            sheep: "sheep",
+            chicken: "chicken",
+            whale: "whale",
+            dolphin: "dolphin",
+            jellyfish: "jellyfish",
+        },
+        animals: ["rabbit", "fox", "bear", "pig", "sheep", "chicken", "whale", "dolphin", "jellyfish"], 
+        messages: ["You went hunting and after finding %a you sold them for %m gold coins!", "You couldn't harm %a because they were so cute. Heres %m coins tho!"],// %a = animal | %m = money
+        break_messages: ["You got lost while hunting and your %i broke!", "You got lost and broke your %i!"], //%i = item
+        helps: ["Gun", "Sword", "Fancy boots", "Rope", "Shovel", "Flashlight"],
+    },
+}
