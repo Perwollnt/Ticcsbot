@@ -14,7 +14,7 @@ export class RealEconomyCommand implements BotCommand {
         enabled: true,
         description: "Economy command",
     }
-    
+
     require: CommandRequire = {
         developer: false,
         mod: true,
@@ -26,7 +26,7 @@ export class RealEconomyCommand implements BotCommand {
     
     onTriggered = async (client: Client, channel: string, state: ChatUserstate, message: String, args: Array<String>) => {
         const db = admin.firestore();
-        const ref = db.collection("TiccsBot").doc("Economy").collection("Users").doc(state['user-id']);
+        const ref = db.collection("TiccsBot").doc("Economy").collection("Users").doc(state['user-id']); // cache.get(`TiccsBot/Economy/Users/${state['user-id']}`)
         const hasitems: string[] = [];
         if(!(await ref.get()).exists) {
             ref.set({ 
@@ -44,19 +44,18 @@ export class RealEconomyCommand implements BotCommand {
                 pickaxe: false,
                 flashlight: false,
             });
-
         }
-            const doc = await (await ref.get()).data();
-            if(await doc.spear as boolean) hasitems.push(items.spear.name);
-            if(await doc.sword as boolean) hasitems.push(items.sword.name);
-            if(await doc.gun as boolean) hasitems.push(items.gun.name);
-            if(await doc.fishing_rod as boolean) hasitems.push(items.fishing_rod.name);
-            if(await doc.fancy_boots as boolean) hasitems.push(items.fancy_boots.name);
-            if(await doc.rope as boolean) hasitems.push(items.rope.name);
-            if(await doc.shovel as boolean) hasitems.push(items.shovel.name);
-            if(await doc.fishing_net as boolean) hasitems.push(items.fishing_net.name);
-            if(await doc.pickaxe as boolean) hasitems.push(items.pickaxe.name);
-            if(await doc.flashlight as boolean) hasitems.push(items.flashlight.name);
+            const doc = (await ref.get()).data();
+            if(doc.spear as boolean) hasitems.push(items.spear.name);
+            if(doc.sword as boolean) hasitems.push(items.sword.name);
+            if(doc.gun as boolean) hasitems.push(items.gun.name);
+            if(doc.fishing_rod as boolean) hasitems.push(items.fishing_rod.name);
+            if(doc.fancy_boots as boolean) hasitems.push(items.fancy_boots.name);
+            if(doc.rope as boolean) hasitems.push(items.rope.name);
+            if(doc.shovel as boolean) hasitems.push(items.shovel.name);
+            if(doc.fishing_net as boolean) hasitems.push(items.fishing_net.name);
+            if(doc.pickaxe as boolean) hasitems.push(items.pickaxe.name);
+            if(doc.flashlight as boolean) hasitems.push(items.flashlight.name);
         if(!args[0]) return client.say(channel, messages.help.message.replace("%u", state.username));
         switch (args[0]) {
             case "work": case "job":
@@ -292,7 +291,7 @@ export class RealEconomyCommand implements BotCommand {
                 break;
             case items.sword.name.toLowerCase():
                 if(balance > item.cost) {
-                    client.say(channel, messages.shop.bought.replace("%u", state.username).replace("%i", item.name).replaceAll("%m", `${item.cost}`));
+                    client.say(channel, shopBoughtMessage(messages, item));
                     await this.addItem(state, item.name);
                     await this.removeMoney(state, `${item.cost}`);
                 } else {
@@ -301,7 +300,7 @@ export class RealEconomyCommand implements BotCommand {
                 break;
             case items.gun.name.toLowerCase():
                 if(balance > item.cost) {
-                    client.say(channel, messages.shop.bought.replace("%u", state.username).replace("%i", item.name).replaceAll("%m", `${item.cost}`));
+                    client.say(channel, shopBoughtMessage(messages, item));
                     await this.addItem(state, item.name);
                     await this.removeMoney(state, `${item.cost}`);
                 } else {
@@ -310,7 +309,7 @@ export class RealEconomyCommand implements BotCommand {
                 break;
             case items.fishing_rod.name.toLowerCase():
                 if(balance > item.cost) {
-                    client.say(channel, messages.shop.bought.replace("%u", state.username).replace("%i", item.name).replaceAll("%m", `${item.cost}`));
+                    client.say(channel, shopBoughtMessage(messages, item));
                     await this.addItem(state, item.name);
                     await this.removeMoney(state, `${item.cost}`);
                 } else {
@@ -319,7 +318,7 @@ export class RealEconomyCommand implements BotCommand {
                 break;
             case items.fancy_boots.name.toLowerCase():
                 if(balance > item.cost) {
-                    client.say(channel, messages.shop.bought.replace("%u", state.username).replace("%i", item.name).replaceAll("%m", `${item.cost}`));
+                    client.say(channel, shopBoughtMessage(messages, item));
                     await this.addItem(state, item.name);
                     await this.removeMoney(state, `${item.cost}`);
                 } else {
@@ -328,7 +327,7 @@ export class RealEconomyCommand implements BotCommand {
                 break;
             case items.rope.name.toLowerCase():
                 if(balance > item.cost) {
-                    client.say(channel, messages.shop.bought.replace("%u", state.username).replace("%i", item.name).replaceAll("%m", `${item.cost}`));
+                    client.say(channel, shopBoughtMessage(messages, item));
                     await this.addItem(state, item.name);
                     await this.removeMoney(state, `${item.cost}`);
                 } else {
@@ -337,7 +336,7 @@ export class RealEconomyCommand implements BotCommand {
                 break;
             case items.shovel.name.toLowerCase():
                 if(balance > item.cost) {
-                    client.say(channel, messages.shop.bought.replace("%u", state.username).replace("%i", item.name).replaceAll("%m", `${item.cost}`));
+                    client.say(channel, shopBoughtMessage(messages, item));
                     await this.addItem(state, item.name);
                     await this.removeMoney(state, `${item.cost}`);
                 } else {
@@ -346,7 +345,7 @@ export class RealEconomyCommand implements BotCommand {
                 break;
             case items.fishing_net.name.toLowerCase():
                 if(balance > item.cost) {
-                    client.say(channel, messages.shop.bought.replace("%u", state.username).replace("%i", item.name).replaceAll("%m", `${item.cost}`));
+                    client.say(channel, shopBoughtMessage(messages, item));
                     await this.addItem(state, item.name);
                     await this.removeMoney(state, `${item.cost}`);
                 } else {
@@ -355,7 +354,7 @@ export class RealEconomyCommand implements BotCommand {
                 break;
             case items.pickaxe.name.toLowerCase():
                 if(balance > item.cost) {
-                    client.say(channel, messages.shop.bought.replace("%u", state.username).replace("%i", item.name).replaceAll("%m", `${item.cost}`));
+                    client.say(channel, shopBoughtMessage(messages, item));
                     await this.addItem(state, item.name);
                     await this.removeMoney(state, `${item.cost}`);
                 } else {
@@ -364,7 +363,7 @@ export class RealEconomyCommand implements BotCommand {
                 break;
             case items.flashlight.name.toLowerCase():
                 if(balance > item.cost) {
-                    client.say(channel, messages.shop.bought.replace("%u", state.username).replace("%i", item.name).replaceAll("%m", `${item.cost}`));
+                    client.say(channel, shopBoughtMessage(messages, item));
                     await this.addItem(state, item.name);
                     await this.removeMoney(state, `${item.cost}`);
                 } else {
@@ -373,6 +372,10 @@ export class RealEconomyCommand implements BotCommand {
                 break;
             default:
                 break;
+            
+            function shopBoughtMessage (messages: any, item: any) {
+                return messages.shop.bought.replace("%u", state.username).replace("%i", item.name).replaceAll("%m", `${item.cost}`);
+            }
         }
     }
     async addItem(state: ChatUserstate, name: string) {
@@ -421,7 +424,7 @@ export class RealEconomyCommand implements BotCommand {
                 this.dice(client, channel, state, message, args, balance, parseInt(`${amount}`));
                 break;
             case "superdice":
-                console.log("Superdice");
+                this.superDice(client, channel, state, message, args, balance, parseInt(`${amount}`));
                 break;
             default:
                 break;
@@ -477,7 +480,5 @@ export class RealEconomyCommand implements BotCommand {
         } else {
             client.say(channel, messages.gamble.wins.draw.replaceAll("%u", state.username).replaceAll("%s", `${userRandom} = ${botRandom}`).replaceAll("%m", bet.toString()));
         }
-    
-    
     }   
 }

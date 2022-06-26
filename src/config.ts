@@ -1,5 +1,4 @@
-import { config } from "dotenv"
-import { ItemInterface, JobInterface } from "./interfaces/EconomyInterface";
+import { config } from "dotenv";
 
 config();
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
