@@ -1,4 +1,3 @@
-import * as https from 'https';
 const axios = require('axios');
 
 

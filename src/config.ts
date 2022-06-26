@@ -108,17 +108,19 @@ export const Economy = {
     gamble: {
         help: "!economy gamble [dice <money> | superdice <number> <money>] | dice: Bet on a dice roll, if the bot rolls higher you lose! | Superdice: Bet money and a nubmer on a dice roll, if you win your winnings will be calculated using: (20 - bet number) * (bet money / 2).",
         wins: {
-            user: "%u! You won(%s)! You get back your %m coin(s) + %w!", //%u = userName | %m = money | %s = state | %w = wincoins
-            bot: "%u! The bot won(%s)! You lost %m coin(s)!", //%u = userName | %m = money | %s = state
-            draw: "%u! It's a draw! (%s) You get your coins back(%m)!", //%u = userName | %m = money | %s = state
+            user: "%un! You won(%bw < %uw)! You get back your %m coin(s) + %w!", //%u = userName | %m = money | %s = state | %w = wincoins
+            bot: "%un! The bot won(%bw > %uw)! You lost %m coin(s)!", //%un = userName | %m = money | %s = state | %uw = UserNumber | %bw = BotNumber
+            draw: "%un! It's a draw! (%bw = %uw) You get your coins back(%m)!", //%u = userName | %m = money | %s = state
         },
         no_bet: "%u!Where's The Money Lebowski?", //%u = userName
-        no_money: "%u! You don't have enough money!", //%u = userName
+        no_money: "%u! You don't have enough money (%m)!", //%u = userName | %m = money
         no_correct_bet: "%u! You need to bet a number between 1 and 20!", //%u = userName
         no_enought_args: "%u! You need to bet a number and a number of coins!", //%u = userName
+        no_real_args_dice: "%u! You need to specify what do you want to do!", //%u = userName
+        no_real_args_money: "%u! You need to specify what do you want to bet!", //%u = userName
     },
     shop: {
-        needarg: "%u! You need to specify an item to buy! (spear, sword, gun, fishing rod, fancy boots, rope, shovel, fishing net, pickaxe, flashlight)", //%u = userName
+        needarg: "%u! You need to specify an item to buy! (%a)", //%u = userName | %a = available items
         no_money: "%u! You don't have enough money to buy a %i! (%m)", //%u = userName | %i = item | %m = money
         bought: "%u! You bought %i for %m coin(s)!", //%u = userName | %i = item | %m = money
     },
