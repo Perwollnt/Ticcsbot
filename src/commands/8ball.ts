@@ -25,5 +25,4 @@ export class EightBallCommand implements BotCommand {
         const answer = this.messages[Math.floor(Math.random() * this.messages.length)];
         client.say(channel, set.messages.Eightball.message.replaceAll("%u", state['display-name']).replaceAll("%answer", answer));
     }
-    
 }

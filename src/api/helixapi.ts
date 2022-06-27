@@ -30,6 +30,6 @@ export class HelixApi {
 
     async getStreamTime(streamId: String) {
         const url = this.baseUrl + "streams?user_id=" + streamId;
-        return axios.get(url, { headers: this.baseHeaders });
+        return await axios.get(url, { headers: this.baseHeaders });
     }
 }
