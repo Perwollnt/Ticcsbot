@@ -4,7 +4,6 @@ import { commandList as commands } from "../stuff/Client";
 import { botconfig as config } from '../config';
 import { messages } from "../config";
 import { BotCommand } from "./interfaces";
-import { chmod } from "fs";
 
 const cooldown = new Collection<String, Collection<String, number>>();
 
@@ -44,10 +43,10 @@ export async function checkTheCommand(client: Client, channel: string, state: Ch
                 }
             }
         }
-        if(isDeveloper(authorId, state) && isMod(state)) {
+        /*if(isDeveloper(authorId, state) && isMod(state)) {
             timestamps.set(authorId, now);
             setTimeout(() => timestamps.delete(authorId), cooldownAmount);
-        }
+        }*/
 
         await cmd.onTriggered(client, channel, state, message, args);
 

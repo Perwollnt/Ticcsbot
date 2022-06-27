@@ -5,7 +5,14 @@ import { UptimeCommand } from '../commands/uptime';
 import { EightBallCommand } from '../commands/8ball';
 import { HelpCommand } from '../commands/help';
 import { AutoMessagerCommand } from '../commands/AutoMessager';
-import { RealEconomyCommand } from '../commands/economy';
+import { EconomyCommand } from '../commands/economy';
+import { ExploreCommand } from '../commands/explore';
+import { FishCommand } from '../commands/fish';
+import { ShopCommand } from '../commands/shop';
+import { HuntCommand } from '../commands/hunt';
+import { MineCommand } from '../commands/mine';
+import { GambleCommand } from '../commands/gamble';
+import { FarmCommand } from '../commands/farm';
 
 export const commands: Array<BotCommand> = [
     new TestCommand,
@@ -14,5 +21,12 @@ export const commands: Array<BotCommand> = [
     new EightBallCommand,
     new HelpCommand,
     new AutoMessagerCommand,
-    new RealEconomyCommand,
+    new EconomyCommand,
+    new ExploreCommand,
+    new FishCommand,
+    new ShopCommand,
+    new HuntCommand,
+    new MineCommand,
+    new GambleCommand,
+    new FarmCommand,
 ];
