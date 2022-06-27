@@ -69,13 +69,6 @@ export class GambleCommand implements BotCommand {
         }
     }
 
-    async addMoney(state: ChatUserstate, money: string) {
-        let doc = await this.db.get("TiccsBot/Economy/Users/" + state['user-id']);
-        const newmoney = parseInt(`${money}`);
-        const dcmoney = doc.money;
-        this.db.set("TiccsBot/Economy/Users/" + state['user-id'], {money: dcmoney + newmoney});
-    }
-
     async superDice(client: Client, channel: string, state: ChatUserstate, message: String, args: Array<String>, balance: number, amount: number) {
         const botRandom = Math.floor(Math.random() * 25) + 1;
         const userRandom = parseInt(`${args[2]}`);
@@ -117,5 +110,12 @@ export class GambleCommand implements BotCommand {
         const newmoney = parseInt(`${money}`);
         const dcmoney = doc.money;
         this.db.set(`TiccsBot/Economy/Users/${state['user-id']}`, { money: (dcmoney - newmoney) });
+    }
+
+    async addMoney(state: ChatUserstate, money: string) {
+        let doc = await this.db.get("TiccsBot/Economy/Users/" + state['user-id']);
+        const newmoney = parseInt(`${money}`);
+        const dcmoney = doc.money;
+        this.db.set("TiccsBot/Economy/Users/" + state['user-id'], {money: dcmoney + newmoney});
     }
 }
