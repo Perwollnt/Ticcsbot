@@ -309,3 +309,35 @@ export const Jobs = {
     helps: ["Gun", "Sword", "Fancy boots", "Rope", "Shovel", "Flashlight"],
   },
 };
+
+export const commands = {
+  coinFlip: {
+    heads: "Heads",
+    tails: "Tails",
+    flipMessage: "%u! You flipped a coin and it landed on %s!", //%u = user | %s = side
+  },
+  roulette: {
+    spinMessage: "%u! You spin the roulette! Let's see what it lands on!", //%u = user
+    nobet: "%u! You didn't bet anything!", //%u = user
+    nomoney: "%u! You don't have enough money! (%m)", //%u = user | %m = money
+    lost: "%u! You lost %m gold coins! (%c != %w)", //%u = user | %m = money | %c = usercolor | %w = wincolor
+    won: "%u! The wheel landed on %c! You won %m gold coins!", //%u = user | %m = money | %c = color
+    colors: {
+      red: "red",
+      black: "black",
+      green: "green",//                                   <--------------
+    }, //                                                               |
+    nocolor: "%u! You didn't choose a color! (%b, %r, %g)", //%u = user | %b = colorblack | %r = colorred | %g = colorgreen
+  },
+  settings: {
+    noarg: "%u! You didn't specify a setting!", //%u = user
+    noexist: "%u! That setting doesn't exist!", //%u = user
+    values: {
+      on: ["on", "true", "enabled", "be"],
+      off: ["off", "false", "disabled", "ki"],
+    },
+    novalue: "%u! You didn't specify a value! [%onv | %offv]", //%u = user | %onv = onvalues | %offv = offvalues
+    set: "%u! You set %s to %v!", //%u = user | %s = setting | %v = value
+    availablecommands: "%u! Available commands: %a", //%c = commands
+  }
+}

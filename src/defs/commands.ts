@@ -13,6 +13,9 @@ import { HuntCommand } from '../commands/hunt';
 import { MineCommand } from '../commands/mine';
 import { GambleCommand } from '../commands/gamble';
 import { FarmCommand } from '../commands/farm';
+import { FlipCommand } from '../commands/coinFlip';
+import { RouletteCommand } from '../commands/roulette';
+import { SettingsCommand } from '../commands/settings';
 
 export const commands: Array<BotCommand> = [
     new TestCommand,
@@ -29,4 +32,7 @@ export const commands: Array<BotCommand> = [
     new MineCommand,
     new GambleCommand,
     new FarmCommand,
+    new FlipCommand,
+    new RouletteCommand,
+    new SettingsCommand,
 ];
